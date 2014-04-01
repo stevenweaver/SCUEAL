@@ -6,6 +6,27 @@ if (MPI_NODE_COUNT <= 1)
 	return 0;
 }
 
+//ExecuteAFile 			("../Configs/settings.ibf"):
+
+//populationSize = 128
+fprintf(stdout, "The number of models in a GA population:");
+fscanf(stdin,"Number", populationSize);	
+
+//stoppingCriterion = 50;
+fprintf(stdout, "How many generations without score improvement before the GA decides it has converged:");
+fscanf(stdin,"Number", noMoreBPsThan);	
+
+//noMoreBPsThan = 10;
+fprintf(stdout, "Do not consider mosaics with more than this many breakpoints.:");
+fscanf(stdin,"Number", noMoreBPsThan);	
+
+//BICMinLength = 100;
+fprintf(stdout, "What is the shortest sequence fragment to be allowed in a mosaic:");
+fscanf(stdin,"Number", BICMinLength);	
+
+//referenceAlignmentFileName  = "pol2011.nex";
+fprintf(stdout, "Name of the reference alignment file:");
+fscanf(stdin,"String", referenceAlignmentFileName);	
 
 ChoiceList (alignmentType, "Codons or Nucleotides", 1, SKIP_NONE, "Codon", 		"In-frame (universal code) codon alignment",
 																  "Nucleotide", "Nucleotide alignment",
@@ -20,7 +41,7 @@ if (alignmentType < 0)
 
 MPI_NODE_STATUS = {MPI_NODE_COUNT-1,1}; /* sequence indices being processed */
 
-ExecuteAFile 			("../Configs/settings.ibf"):
+
 	
 SetDialogPrompt 		("A sequence file to screen:");
 DataSet ds_in 			= ReadDataFile (PROMPT_FOR_FILE);
