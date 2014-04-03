@@ -174,8 +174,7 @@ if (alignmentType == 0)
 	codonOptions ["6"] = njOptions ["6"];
 	codonOptions ["7"] = "Estimate";
 	
-	ExecuteAFile (HYPHY_LIB_DIRECTORY + "TemplateBatchFiles" + DIRECTORY_SEPARATOR 
-									   + "AnalyzeCodonData.bf", codonOptions);
+	ExecuteAFile ("AnalyzeCodonData.bf", codonOptions);
 }
 
 if (alignmentType == 1)
@@ -193,8 +192,7 @@ if (alignmentType == 1)
 	codonOptions ["6"] = njOptions ["6"];
 	codonOptions ["7"] = "Don't Display";
 	
-	ExecuteAFile (HYPHY_LIB_DIRECTORY + "TemplateBatchFiles" + DIRECTORY_SEPARATOR 
-									   + "AnalyzeNucProtData.bf", codonOptions);
+	ExecuteAFile ("AnalyzeNucProtData.bf", codonOptions);
 }
 
 VERBOSITY_LEVEL = 0;
@@ -233,7 +231,7 @@ for (k=0; k < tc; k = k+1)
 {
 	nodeName 	  = TipName (givenTree,k);
 	subexp = extractAllExpressions (nodeName, "[^_]+", "");
-	sequenceLabels [nodeName&&1] = subexp[0]+"-"+subexp[1];
+	sequenceLabels [nodeName&&1] = subexp[1]; /* subexp[0]; */ /* subexp[0]+"-"+subexp[1]; */
 	
 	fprintf (stdout, nodeName, "->", sequenceLabels [nodeName&&1], "\n");
 }
